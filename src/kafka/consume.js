@@ -1,5 +1,5 @@
 const Kafka = require("node-rdkafka"); // see: https://github.com/blizzard/node-rdkafka
-const externalConfig = require('./consumer-config').config;
+const externalConfig = require('./kafka-config').config;
 
 const CONSUMER_GROUP_ID = "node-consumer-one";
 const io = require("../socket-server/server");
