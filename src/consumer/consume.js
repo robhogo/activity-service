@@ -1,7 +1,8 @@
 const Kafka = require("node-rdkafka"); // see: https://github.com/blizzard/node-rdkafka
-const externalConfig = require('./config').config;
+const externalConfig = require('./consumer-config').config;
 
-const CONSUMER_GROUP_ID = "node-consumer-one"
+const CONSUMER_GROUP_ID = "node-consumer-one";
+const server = require("../socket-server/server");
 
 const kafkaConf = {
     "group.id": CONSUMER_GROUP_ID,
@@ -28,6 +29,9 @@ stream.on('data', function (message) {
     //     key: 'someKey', // key of the message if present
     //     timestamp: 1510325354780 // timestamp of message creation
     //   }
+    server.io.on('connection', (socket) => {
+        socket.emit('chat message', input.value);
+    });
 });
 
 console.log(`Stream consumer created to consume from topic ${topics}`);
