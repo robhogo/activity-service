@@ -28,3 +28,5 @@ stream.consumer.on("disconnected", function (arg) {
     console.log(`The stream consumer has been disconnected`)
     process.exit();
 });
+
+module.exports = { stream }

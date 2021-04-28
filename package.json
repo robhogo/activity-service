@@ -4,7 +4,7 @@
     "description": "",
     "main": "src/kafka/consume.js",
     "scripts": {
-        "start": "node src/kafka/consume.js"
+        "start": "node app"
     },
     "author": "",
     "license": "ISC",
