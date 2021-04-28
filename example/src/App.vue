@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <i-listen-to-sockets/>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import IListenToSockets from './components/IListenToSockets.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    IListenToSockets,
   },
 })
 export default class App extends Vue {}

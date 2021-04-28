@@ -3,7 +3,15 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
+
+
+const io = new Server(server, {
+  cors: {
+    cors: {
+      origin: "*",
+    }
+  }
+});
 const produce = require('../kafka/produce');
 
 app.get('/', (req, res) => {
@@ -26,5 +34,6 @@ io.on('connection', (socket) => {
         produce.emit('chat message', msg);
     });
 });
+
 
 module.exports =  io ;
