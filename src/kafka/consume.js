@@ -11,25 +11,20 @@ const kafkaConf = {
     "debug": "generic,broker,security"
 };
 
-const topics = [externalConfig.KAFKA_TOPIC];
+const topic = externalConfig.KAFKA_TOPIC;
 
 var stream = new Kafka.KafkaConsumer.createReadStream(kafkaConf, { "auto.offset.reset": "earliest" }, {
-    topics: topics
+    topics: topic
 });
+
+console.log(`Stream consumer created to consume from topic ${topic}`);
 
 stream.on('data', function (message) {
     console.log(`Consumed message on Stream: ${message.value.toString()}`);
     io.emit('chat message', message.value.toString());
 });
 
-console.log(`Stream consumer created to consume from topic ${topics}`);
-
 stream.consumer.on("disconnected", function (arg) {
     console.log(`The stream consumer has been disconnected`)
     process.exit();
 });
-
-// automatically disconnect the consumer after 30 seconds
-setTimeout(function () {
-    stream.consumer.disconnect();
-}, 500000000)
