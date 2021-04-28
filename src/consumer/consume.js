@@ -40,4 +40,4 @@ stream.consumer.on("disconnected", function (arg) {
 // automatically disconnect the consumer after 30 seconds
 setTimeout(function () {
     stream.consumer.disconnect();
-}, 30000)
+}, 500000000)
