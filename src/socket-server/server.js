@@ -25,4 +25,4 @@ io.on('connection', (socket) => {
         io.emit('chat message', msg);
     });
 });
-exports.io = { io };
+module.exports =  io ;

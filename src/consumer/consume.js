@@ -2,7 +2,7 @@ const Kafka = require("node-rdkafka"); // see: https://github.com/blizzard/node-
 const externalConfig = require('./consumer-config').config;
 
 const CONSUMER_GROUP_ID = "node-consumer-one";
-const server = require("../socket-server/server");
+const io = require("../socket-server/server");
 
 const kafkaConf = {
     "group.id": CONSUMER_GROUP_ID,
@@ -19,17 +19,7 @@ var stream = new Kafka.KafkaConsumer.createReadStream(kafkaConf, { "auto.offset.
 
 stream.on('data', function (message) {
     console.log(`Consumed message on Stream: ${message.value.toString()}`);
-    // the structure of the messages is as follows:
-    //   {
-    //     value: Buffer.from('hi'), // message contents as a Buffer
-    //     size: 2, // size of the message, in bytes
-    //     topic: 'librdtesting-01', // topic the message comes from
-    //     offset: 1337, // offset the message was read from
-    //     partition: 1, // partition the message was on
-    //     key: 'someKey', // key of the message if present
-    //     timestamp: 1510325354780 // timestamp of message creation
-    //   }
-    server.io.socket.emit('chat message', input.value);
+    io.emit('chat message', message.value.toString());
 });
 
 console.log(`Stream consumer created to consume from topic ${topics}`);
