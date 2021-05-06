@@ -1,0 +1,1 @@
+const consume = require("./src/kafka/consume");
